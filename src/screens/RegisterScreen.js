@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import React, { useState } from "react";
 import { Screen } from "../components/Screen";
 import { AppInput } from "../components/AppInput";
 import AppButton from "../components/AppButton";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { app, authantication, db } from "../firebase/firebase";
-import { doc, addDoc, setDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 export const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");

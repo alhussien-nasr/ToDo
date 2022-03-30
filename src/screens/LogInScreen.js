@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import React, { useState } from "react";
 import { Screen } from "../components/Screen";
 import { AppInput } from "../components/AppInput";
@@ -56,7 +56,7 @@ export const LoginScreen = ({ navigation }) => {
               // Signed in..
             })
             .catch((error) => {
-                console.log(error)
+              console.log(error);
               // ...
             });
         }}

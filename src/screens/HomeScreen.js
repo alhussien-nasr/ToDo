@@ -4,7 +4,6 @@ import {
   View,
   Modal,
   FlatList,
-  TouchableOpacity,
   TouchableWithoutFeedback,
 } from "react-native";
 import React, { useState, useEffect } from "react";

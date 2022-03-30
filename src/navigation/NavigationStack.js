@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import { AddToDoScreen } from "../screens/AddToDoScreen";
 import { HomeScreen } from "../screens/HomeScreen";
@@ -8,7 +8,6 @@ import { LoginScreen } from "../screens/LogInScreen";
 import { UserInfo } from "../screens/UserInfo";
 import { NavigationContainer } from "@react-navigation/native";
 import { authantication } from "../firebase/firebase";
-import { async } from "@firebase/util";
 const Stack = createNativeStackNavigator();
 export const NavigationStack = () => {
   const [user, setUser] = useState({});

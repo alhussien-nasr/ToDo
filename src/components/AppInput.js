@@ -10,7 +10,6 @@ export const AppInput = ({ onChangeText, style, ...rest }) => {
       {...rest}
       onChangeText={onChangeText}
       style={[styles.input, style]}
-      
     />
   );
 };

@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import { app, authantication, db } from "../firebase/firebase";
+import { authantication, db } from "../firebase/firebase";
 import AppButton from "../components/AppButton";
 import { Screen } from "../components/Screen";
 import { signOut } from "firebase/auth";
-import { collection, getDocs, getDoc, doc } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 import { useIsFocused } from "@react-navigation/native";
 
 export const UserInfo = ({ navigation }) => {

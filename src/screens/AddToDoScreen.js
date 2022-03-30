@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import React, { useState } from "react";
 import { Screen } from "../components/Screen";
 import AppButton from "../components/AppButton";
 import { AppInput } from "../components/AppInput";
-import { app, authantication, db } from "../firebase/firebase";
+import { authantication, db } from "../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
 
 export const AddToDoScreen = ({ navigation }) => {
