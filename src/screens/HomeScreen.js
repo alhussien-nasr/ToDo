@@ -41,9 +41,6 @@ export const HomeScreen = ({ navigation }) => {
       authantication.onAuthStateChanged((user) => setUser(user));
     return foo();
   }, []);
-  console.log(user);
-  console.log(authantication.currentUser.email);
-  console.log(list);
 
   return (
     <Screen style={styles.container}>

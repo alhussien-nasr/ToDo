@@ -17,7 +17,7 @@ export const UserInfo = ({ navigation }) => {
     );
 
     if (docSnap) {
-      setList(docSnap.docs.map((i) => ({ ...i.data(), docId: i.id })));
+      setList(docSnap.data());
     } else {
       console.log("No such document!");
     }
@@ -25,19 +25,14 @@ export const UserInfo = ({ navigation }) => {
   console.log(list);
   return (
     <Screen>
-      {authantication.currentUser.email && (
+      {authantication?.currentUser?.email && (
         <Text style={styles.header}>UserInfo</Text>
       )}
-      <FlatList
-        data={list}
-        style={styles.flatlist}
-        renderItem={({ item }) => (
-          <View style={styles.flatlistItem}>
-            <Text style={styles.text}>{item.name}</Text>
-            <Text style={styles.text}>{item.email}</Text>
-          </View>
-        )}
-      />
+      <View style={styles.list}>
+        <Text style={styles.text}>{list.name}</Text>
+        <Text style={styles.text}>{list.email}</Text>
+      </View>
+
       <AppButton
         onPress={() => navigation.navigate("Home")}
         title={"home"}
@@ -65,8 +60,7 @@ export const UserInfo = ({ navigation }) => {
 const styles = StyleSheet.create({
   btn: { width: "50%", height: 60, alignSelf: "center", marginTop: 30 },
   btnText: { fontSize: 25 },
-  flatlist: { width: "100%" },
-  flatlistItem: {
+  list: {
     width: "100%",
     height: 50,
     justifyContent: "space-between",
