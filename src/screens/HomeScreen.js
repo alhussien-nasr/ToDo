@@ -81,11 +81,14 @@ export const HomeScreen = ({ navigation }) => {
                   style={styles.modalBtn}
                   title="Log In"
                   TextStyle={styles.modalText}
+                  onPress={()=>navigation.navigate('LoginScreen')}
                 />
                 <AppButton
                   style={styles.modalBtn}
                   title="Register"
                   TextStyle={styles.modalText}
+                  onPress={()=>navigation.navigate('RegisterScreen')}
+
                 />
               </>
             </TouchableWithoutFeedback>
