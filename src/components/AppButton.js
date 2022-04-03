@@ -1,15 +1,26 @@
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import React from "react";
 
-const AppButton = ({ onPress, style, title, TextStyle }) => {
+export const AppButton = ({ onPress, style, title, TextStyle, loading }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
-      <Text style={[styles.text, TextStyle]}>{title}</Text>
+    <TouchableOpacity
+      disabled={loading}
+      onPress={onPress}
+      style={[styles.container, style]}
+    >
+      {loading ? (
+        <ActivityIndicator />
+      ) : (
+        <Text style={[styles.text, TextStyle]}>{title || "press"}</Text>
+      )}
     </TouchableOpacity>
   );
 };
-
-export default AppButton;
 
 const styles = StyleSheet.create({
   container: {

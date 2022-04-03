@@ -1,8 +1,7 @@
 import { StyleSheet, Text } from "react-native";
 import React, { useState } from "react";
 import { Screen } from "../components/Screen";
-import { AppInput } from "../components/AppInput";
-import AppButton from "../components/AppButton";
+import { AppButton, AppInput } from "../components";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from "../firebase/firebase";
 import { doc, setDoc } from "firebase/firestore";

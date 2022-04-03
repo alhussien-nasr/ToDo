@@ -1,17 +1,8 @@
 import { StyleSheet, TextInput } from "react-native";
 import React from "react";
 
-export const AppInput = ({ onChangeText, style, ...rest }) => {
-  return (
-    <TextInput
-      autoCorrect={false}
-      autoCapitalize={false}
-      autoComplet={false}
-      {...rest}
-      onChangeText={onChangeText}
-      style={[styles.input, style]}
-    />
-  );
+export const AppInput = ({ style, ...rest }) => {
+  return <TextInput {...rest} style={[styles.input, style]} />;
 };
 
 const styles = StyleSheet.create({

@@ -5,41 +5,65 @@ import {
   Modal,
   FlatList,
   TouchableWithoutFeedback,
+  TouchableOpacity,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Screen } from "../components/Screen";
-import AppButton from "../components/AppButton";
+import { AppButton } from "../components";
 import { authantication, db } from "../firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { useIsFocused } from "@react-navigation/native";
 import { BlurView } from "expo-blur";
+import { useDispatch, useSelector } from "react-redux";
+import { removeItem } from "../redux/ToDoList/actions";
 
-export const HomeScreen = ({ navigation }) => {
-  const [list, setList] = useState([]);
+export const HomeScreen = ({ navigation, route }) => {
+  const list = useSelector((state) => state.toDo?.list);
+  console.log("homeScreen", list);
+  // const [list, setList] = useState([]);
   const [visiable, setVisiable] = useState(false);
   const [user, setUser] = useState({});
 
   const isFocused = useIsFocused();
 
-  useEffect(async () => {
+  useEffect(() => {
+    // getToDoList();
+    updateUserData();
+    
+  }, []);
+
+  const getToDoList = async () => {
     const docSnap = await getDocs(collection(db, "toDoList"));
 
     if (docSnap) {
-      setList(
-        docSnap.docs
-          .filter((i) => i.data().userId === authantication.currentUser.uid)
-          .map((i) => ({ ...i.data(), docId: i.id }))
-      );
+      const data = docSnap.docs
+        .filter((i) => i.data().userId === authantication.currentUser.uid)
+        .map((i) => ({ ...i.data(), docId: i.id }));
+      setList(data);
     } else {
       console.log("No such document!");
     }
-  }, [isFocused]);
+  };
 
-  useEffect(() => {
-    const foo = () =>
-      authantication.onAuthStateChanged((user) => setUser(user));
-    return foo();
-  }, []);
+  const updateUserData = () => {
+    authantication.onAuthStateChanged((user) => setUser(user));
+  };
+  console.log(list);
+  const dispatch = useDispatch();
+  const renderItem = ({ item }) => {
+    return (
+      <View style={styles.itemList}>
+        <TouchableOpacity
+          onPress={() => {
+            dispatch(removeItem(item.id));
+          }}
+        >
+          <Text>remove</Text>
+        </TouchableOpacity>
+        <Text> {item.do}</Text>
+      </View>
+    );
+  };
 
   return (
     <Screen style={styles.container}>
@@ -55,11 +79,9 @@ export const HomeScreen = ({ navigation }) => {
       />
       <FlatList
         data={list}
-        renderItem={({ item }) => (
-          <View>
-            <Text> {item.toDo}</Text>
-          </View>
-        )}
+        // keyExtractor
+        renderItem={renderItem}
+        style={{width:'100%' ,}}
       />
       <Modal
         transparent={true}
@@ -81,14 +103,13 @@ export const HomeScreen = ({ navigation }) => {
                   style={styles.modalBtn}
                   title="Log In"
                   TextStyle={styles.modalText}
-                  onPress={()=>navigation.navigate('LoginScreen')}
+                  onPress={() => navigation.navigate("LoginScreen")}
                 />
                 <AppButton
                   style={styles.modalBtn}
                   title="Register"
                   TextStyle={styles.modalText}
-                  onPress={()=>navigation.navigate('RegisterScreen')}
-
+                  onPress={() => navigation.navigate("RegisterScreen")}
                 />
               </>
             </TouchableWithoutFeedback>
@@ -116,5 +137,11 @@ const styles = StyleSheet.create({
     flex: 1,
 
     borderRadius: 50,
+  },
+  itemList: {
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
+    alignItems:'center',height:30
   },
 });

@@ -13,10 +13,11 @@ export const NavigationStack = () => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    const foo = () =>
-      authantication.onAuthStateChanged((user) => setUser(user));
-    return foo();
+    updateUserData();
   }, []);
+  const updateUserData = () => {
+    authantication.onAuthStateChanged((user) => setUser(user));
+  };
   console.log(user);
 
   return (
